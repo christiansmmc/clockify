@@ -12,11 +12,15 @@ class Clockify:
 
         last_month = datetime.now().month - 1
         year = datetime.now().year
+
+        if last_month == 0:
+            last_month = 12
+            year = year - 1
+
         last_day_of_month = calendar.monthrange(year, last_month)
 
         initial_date = str(datetime(int(year), int(last_month), 1)).replace(" ", "T")
-        final_date = str(datetime(int(year), int(last_month), int(last_day_of_month[1]))).replace(" ", "T").replace(
-            "00:00:00", "23:59:59")
+        final_date = str(datetime(int(year), int(last_month), int(last_day_of_month[1]))).replace(" ", "T").replace("00:00:00", "23:59:59")
 
         self.data = {
             "exportType": "JSON",
